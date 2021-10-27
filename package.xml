@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>freddy_bringup</name>
+  <version>0.0.0</version>
+  <description>Package for starting components on Freddy</description>
+
+  <maintainer email="robotics@inf.h-brs.de">MAS robotics</maintainer>
+
+  <license>GPLv3</license>
+
+  <author email="aleksandar.mitrevski@h-brs.de">Alex Mitrevski</author>
+  <author email="dharmingeo@gmail.com">Dharmin B.</author>
+  <author email="sushant.chavan@smail.inf.h-brs.de">Sushant Chavan</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>freddy_description</build_depend>
+  <build_export_depend>freddy_description</build_export_depend>
+  <exec_depend>freddy_description</exec_depend>
+
+</package>
