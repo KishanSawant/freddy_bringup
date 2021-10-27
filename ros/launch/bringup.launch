@@ -31,7 +31,7 @@
     <!-- Launch the navigation stack -->
     <group if="$(arg start_navigation_stack)">
         <!-- Launch AMCL -->
-        <include file="$(find ropod_single_robot_sim)/ros/launch/amcl.launch">
+        <include file="$(find freddy_bringup)/ros/launch/amcl.launch">
             <arg name="robot_name" value="$(arg robot_name)" />
             <arg name="initial_pose_x" value="$(eval arg('init_x') + arg('map_offset_x'))" />
             <arg name="initial_pose_y" value="$(eval arg('init_y') + arg('map_offset_y'))" />
@@ -40,14 +40,14 @@
         </include>
 
         <!-- Launch MoveBase DWA if activated -->
-        <include file="$(find ropod_single_robot_sim)/ros/launch/move_base_dwa.launch" if="$(eval arg('nav_name') == 'dwa')">
+        <include file="$(find freddy_bringup)/ros/launch/move_base_dwa.launch" if="$(eval arg('nav_name') == 'dwa')">
             <arg name="robot_name" value="$(arg robot_name)" />
             <arg name="controller_frequency" value="$(arg controller_frequency)"/>
             <arg name="costmap_params_dir" value="$(arg costmap_params_dir)" />
         </include>
 
         <!-- Launch MoveBase TEB if activated -->
-        <include file="$(find ropod_single_robot_sim)/ros/launch/move_base_teb.launch" if="$(eval arg('nav_name') == 'teb')">
+        <include file="$(find freddy_bringup)/ros/launch/move_base_teb.launch" if="$(eval arg('nav_name') == 'teb')">
             <arg name="robot_name" value="$(arg robot_name)" />
             <arg name="controller_frequency" value="$(arg controller_frequency)"/>
             <arg name="costmap_params_dir" value="$(arg costmap_params_dir)" />
