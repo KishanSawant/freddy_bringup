@@ -15,6 +15,10 @@
   <buildtool_depend>catkin</buildtool_depend>
   <build_depend>freddy_description</build_depend>
   <build_export_depend>freddy_description</build_export_depend>
-  <exec_depend>freddy_description</exec_depend>
 
+  <exec_depend>urg_node</exec_depend>
+  <exec_depend>ira_laser_tools</exec_depend>
+  <exec_depend>move_base</exec_depend>
+  <exec_depend>amcl</exec_depend>
+  <exec_depend>freddy_description</exec_depend>
 </package>
