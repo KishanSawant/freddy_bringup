@@ -16,6 +16,7 @@
 
     <!-- Start front laser driver -->
     <include file="$(find freddy_bringup)/ros/launch/sensors/hokuyo.launch">
+        <arg name="name" value="front_laser" />
         <arg name="ip_address" value="$(arg front_laser_ip)" />
         <arg name="frame_id" value="$(arg front_laser_frame_id)" />
         <remap from="/scan" to="$(arg front_laser_topic_name)" />
@@ -23,6 +24,7 @@
 
     <!-- Start back laser driver -->
     <include file="$(find freddy_bringup)/ros/launch/sensors/hokuyo.launch">
+        <arg name="name" value="back_laser" />
         <arg name="ip_address" value="$(arg back_laser_ip)" />
         <arg name="frame_id" value="$(arg back_laser_frame_id)" />
         <remap from="/scan" to="$(arg back_laser_topic_name)" />

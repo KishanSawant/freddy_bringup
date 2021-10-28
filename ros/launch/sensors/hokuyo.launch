@@ -1,5 +1,6 @@
 <?xml version='1.0'?>
 <launch>
+    <arg name="name" />
     <arg name="ip_address" />
     <arg name="frame_id" />
     <arg name="serial_port" default="" />
@@ -10,7 +11,7 @@
     <arg name="angle_min" default="-2.35619" />
     <arg name="angle_max" default="2.35619" />
 
-    <node name="urg_node" pkg="urg_node" type="urg_node" output="screen">
+    <node name="$(arg name)_node" pkg="urg_node" type="urg_node" output="screen">
       <param name="ip_address" value="$(arg ip_address)"/>
       <param name="serial_port" value="$(arg serial_port)"/>
       <param name="serial_baud" value="$(arg serial_baud)"/>
