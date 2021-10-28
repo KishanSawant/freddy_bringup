@@ -9,8 +9,10 @@
     <arg name="calibrate_time" default="true" />
     <arg name="publish_intensity" default="false" />
     <arg name="publish_multiecho" default="false" />
-    <arg name="angle_min" default="-2.35619" />
-    <arg name="angle_max" default="2.35619" />
+
+    <!-- TODO: use full angular range from -2.35619 to 2.35619 -->
+    <arg name="angle_min" default="-1.57" />
+    <arg name="angle_max" default="1.57" />
 
     <node name="$(arg name)_node" pkg="urg_node" type="urg_node" output="screen">
       <param name="ip_address" value="$(arg ip_address)"/>
