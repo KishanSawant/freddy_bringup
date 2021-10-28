@@ -1,57 +1,30 @@
 <?xml version='1.0'?>
 <launch>
-    <!-- Robot description -->
-    <arg name="robot_name" default="$(optenv ROBOT_NAME)" />
+    <arg name="front_laser_ip" default="192.168.1.101" />
+    <arg name="front_laser_frame_id" default="base_laser_front_link" />
+    <arg name="front_laser_topic_name" default="/freddy/base_scan_front" />
 
-    <!-- Robot Spawn position -->
-    <arg name="init_x" default="0.0"/>
-    <arg name="init_y" default="0.0"/>
-    <arg name="init_theta" default="0.0"/>
+    <arg name="back_laser_ip" default="192.168.1.102" />
+    <arg name="back_laser_frame_id" default="base_laser_back_link" />
+    <arg name="back_laser_topic_name" default="/freddy/base_scan_back" />
 
-    <!-- Map offsets -->
-    <arg name="map_offset_x" default="0.0" />
-    <arg name="map_offset_y" default="0.0" />
-    <arg name="map_offset_theta" default="0.0" />
-
-    <!-- Navigation parameters -->
-    <arg name="start_navigation_stack" default="true"/>
-    <arg name="nav_name" default="teb"/>
-    <arg name="controller_frequency" default="5.0"/>
-    <arg name="costmap_params_dir" default="$(find freddy_bringup)/ros/config/move_base_config"/>
-    <arg name="scan_topic_name" default="/$(arg robot_name)/base_scan_front"/>
-
-    <!-- Launch the Robot -->
+    <!-- Publish robot description -->
     <param name="robot_description" command="$(find xacro)/xacro $(find freddy_description)/robots/freddy.urdf.xacro" />
-
-
     <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
       <param name="publish_frequency" type="double" value="30.0" />
     </node>
 
-    <!-- Launch the navigation stack -->
-    <group if="$(arg start_navigation_stack)">
-        <!-- Launch AMCL -->
-        <include file="$(find freddy_bringup)/ros/launch/amcl.launch">
-            <arg name="robot_name" value="$(arg robot_name)" />
-            <arg name="initial_pose_x" value="$(eval arg('init_x') + arg('map_offset_x'))" />
-            <arg name="initial_pose_y" value="$(eval arg('init_y') + arg('map_offset_y'))" />
-            <arg name="initial_pose_a" value="$(eval arg('init_theta') + arg('map_offset_theta'))" />
-            <arg name="scan_topic_name" value="$(arg scan_topic_name)" />
-        </include>
+    <!-- Start front laser driver -->
+    <include file="$(find freddy_bringup)/ros/launch/sensors/hokuyo.launch">
+        <arg name="ip_address" value="$(arg front_laser_ip)" />
+        <arg name="frame_id" value="$(arg front_laser_frame_id)" />
+        <remap from="/scan" to="$(arg front_laser_topic_name)" />
+    </include>
 
-        <!-- Launch MoveBase DWA if activated -->
-        <include file="$(find freddy_bringup)/ros/launch/move_base_dwa.launch" if="$(eval arg('nav_name') == 'dwa')">
-            <arg name="robot_name" value="$(arg robot_name)" />
-            <arg name="controller_frequency" value="$(arg controller_frequency)"/>
-            <arg name="costmap_params_dir" value="$(arg costmap_params_dir)" />
-        </include>
-
-        <!-- Launch MoveBase TEB if activated -->
-        <include file="$(find freddy_bringup)/ros/launch/move_base_teb.launch" if="$(eval arg('nav_name') == 'teb')">
-            <arg name="robot_name" value="$(arg robot_name)" />
-            <arg name="controller_frequency" value="$(arg controller_frequency)"/>
-            <arg name="costmap_params_dir" value="$(arg costmap_params_dir)" />
-        </include>
-    </group>
-
+    <!-- Start back laser driver -->
+    <include file="$(find freddy_bringup)/ros/launch/sensors/hokuyo.launch">
+        <arg name="ip_address" value="$(arg back_laser_ip)" />
+        <arg name="frame_id" value="$(arg back_laser_frame_id)" />
+        <remap from="/scan" to="$(arg back_laser_topic_name)" />
+    </include>
 </launch>
