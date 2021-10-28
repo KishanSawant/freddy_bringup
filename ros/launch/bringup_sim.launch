@@ -19,8 +19,13 @@
     <arg name="init_theta" default="0.0" />
 
     <!-- Navigation config -->
-    <arg name="start_navigation_stack" default="true" />
     <arg name="nav_name" default="teb"/>
+
+    <!-- Publish robot description -->
+    <param name="robot_description" command="$(find xacro)/xacro $(find freddy_description)/robots/freddy.urdf.xacro" />
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
+      <param name="publish_frequency" type="double" value="30.0" />
+    </node>
 
     <!-- Launch the world -->
     <include file="$(find gazebo_sim)/ros/launch/start_sim_env.launch">
@@ -32,13 +37,13 @@
     </include>
 
     <!-- Launch the robot bringup -->
-    <include file="$(find freddy_bringup)/ros/launch/bringup.launch">
+    <include file="$(find freddy_bringup)/ros/launch/navigation.launch">
         <arg name="robot_name" value="$(arg robot_name)"/>
         <arg name="init_x" value="$(arg init_x)"/>
         <arg name="init_y" value="$(arg init_y)"/>
         <arg name="init_theta" value="$(arg init_theta)"/>
-        <arg name="start_navigation_stack" value="$(arg start_navigation_stack)"/>
         <arg name="nav_name" value="$(arg nav_name)"/>
+        <arg name="scan_topic_name" value="$(arg scan_topic_name)"/>
     </include>
 
     <!-- Spawn robot model in gazebo-->
