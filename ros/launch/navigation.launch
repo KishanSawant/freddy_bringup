@@ -3,21 +3,26 @@
     <!-- Robot description -->
     <arg name="robot_name" default="$(optenv ROBOT_NAME)" />
 
-    <!-- Robot Spawn position -->
+    <!-- Robot spawn position -->
     <arg name="init_x" default="0.0"/>
     <arg name="init_y" default="0.0"/>
     <arg name="init_theta" default="0.0"/>
 
-    <!-- Map offsets -->
+    <!-- Map parameters -->
     <arg name="map_offset_x" default="0.0" />
     <arg name="map_offset_y" default="0.0" />
     <arg name="map_offset_theta" default="0.0" />
+
+    <arg name="world" default="brsu_ground_floor"/>
+    <arg name="map_file" default="$(find mas_environments)/clean_maps/$(arg world)/$(arg world).yaml" />
 
     <!-- Navigation parameters -->
     <arg name="nav_name" default="teb"/>
     <arg name="controller_frequency" default="5.0"/>
     <arg name="costmap_params_dir" default="$(find freddy_bringup)/ros/config/move_base_config"/>
     <arg name="scan_topic_name" default="/$(arg robot_name)/base_scan_front"/>
+
+    <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
 
     <node pkg="ira_laser_tools" name="laserscan_multi_merger" type="laserscan_multi_merger" output="screen">
         <param name="destination_frame" value="base_link"/>
