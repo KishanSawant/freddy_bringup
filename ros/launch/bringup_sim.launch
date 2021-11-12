@@ -11,7 +11,7 @@
     <arg name="debug" default="false"/>
 
     <!-- World model and map config -->
-    <arg name="world" default="brsu"/>
+    <arg name="world" default="brsu_ground_floor"/>
 
     <!-- Robot spawn pose -->
     <arg name="init_x" default="0.0" />
@@ -39,6 +39,7 @@
     <!-- Launch the robot bringup -->
     <include file="$(find freddy_bringup)/ros/launch/navigation.launch">
         <arg name="robot_name" value="$(arg robot_name)"/>
+        <arg name="world" value="$(arg world)"/>
         <arg name="init_x" value="$(arg init_x)"/>
         <arg name="init_y" value="$(arg init_y)"/>
         <arg name="init_theta" value="$(arg init_theta)"/>
