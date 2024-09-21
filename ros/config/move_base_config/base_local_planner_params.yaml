@@ -1,34 +1,34 @@
 TrajectoryPlannerROS:
     # Robot Configuration parameters
     # ==============================
-    acc_lim_x: 2.0                              # (double, default: 2.5)
+    acc_lim_x: 0.2                              # (double, default: 2.5)
     # The x acceleration limit of the robot in meters/sec^2
 
-    acc_lim_y: 2.5                              # (double, default: 2.5)
+    acc_lim_y: 0.2                              # (double, default: 2.5)
     # The y acceleration limit of the robot in meters/sec^2
 
-    acc_lim_theta: 1.0                          # (double, default: 3.2)
+    acc_lim_theta: 0.2                           # (double, default: 3.2)
     # The rotational acceleration limit of the robot in radians/sec^2
 
-    max_vel_x: 1.0                              # (double, default: 0.5)
+    max_vel_x: 0.3                             # (double, default: 0.5)
     # The maximum forward velocity allowed for the base in meters/sec
 
-    min_vel_x: 0.2                              # (double, default: 0.1)
+    min_vel_x: 0.1                              # (double, default: 0.1)
     # The minimum forward velocity allowed for the base in meters/sec. It is useful to specify this to guarantee that velocity commands sent to a mobile base are high enough to allow the base to overcome friction.
 
-    max_vel_theta: 1.5                          # (double, default: 1.0)
+    max_vel_theta: 0.2                          # (double, default: 1.0)
     # The maximum rotational velocity allowed for the base in radians/sec
 
-    min_vel_theta: -1.5                         # (double, default: -1.0)
+    min_vel_theta: -0.2                        # (double, default: -1.0)
     # The minimum rotational velocity allowed for the base in radians/sec
 
     min_in_place_vel_theta: 0.4                 # (double, default: 0.4)
     # The minimum rotational velocity allowed for the base while performing in-place rotations in radians/sec
 
-    escape_vel: -0.1                            # (double, default: -0.1)
+    escape_vel: -0.2                            # (double, default: -0.1)
     # Speed used for driving during escapes in meters/sec. Note that it must be negative in order for the robot to actually reverse. A positive speed will cause the robot to move forward while attempting to escape.
 
-    holonomic_robot: false                      # (bool, default: true)
+    holonomic_robot: true                      # (bool, default: true)
     # Determines whether velocity commands are generated for a holonomic or non-holonomic robot. For holonomic robots, strafing velocity commands may be issued to the base. For non-holonomic robots, no strafing velocity commands will be issued.
 
     # The following parameters are only used if holonomic_robot is set to true:
@@ -48,7 +48,7 @@ TrajectoryPlannerROS:
 
     # Forward Simulation Parameters
     # =============================
-    sim_time: 5.0                               # (double, default: 1.0)
+    sim_time: 0.5                               # (double, default: 1.0)
     # # The amount of time to forward-simulate trajectories in seconds
 
     sim_granularity: 0.1                        # (double, default: 0.025)
@@ -100,10 +100,10 @@ TrajectoryPlannerROS:
     # # (DWA)_ or whether to use Trajectory Rollout:
     # # (NOTE: In our experience DWA worked as well as Trajectory Rollout and is computationally less expensive. It is possible that robots with extremely poor acceleration limits could gain from running Trajectory Rollout, but we recommend trying DWA first.)
 
-    # publish_cost_grid_pc: false                 # (bool, default: false)
+    publish_cost_grid_pc: true                 # (bool, default: false)
     # # Whether or not to publish the cost grid that the planner will use when planning. When true, a sensor_msgs/PointCloud2 will be available on the     cost_cloud topic. Each point cloud represents the cost grid and has a field for each individual scoring function component as well as the overall cost for each cell, taking the scoring parameters into account.
 
-    # global_frame_id: odom                       # (string, default: odom)
+    global_frame_id: odom                       # (string, default: odom)
     # # The frame to set for the cost_cloud. Should be set to the same frame as the local costmap's global frame.
 
     # # Oscillation Prevention Parameters

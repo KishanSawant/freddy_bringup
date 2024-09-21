@@ -14,17 +14,18 @@
     <arg name="map_offset_theta" default="0.0" />
 
     <arg name="world" default="brsu_ground_floor"/>
-    <arg name="map_file" default="$(find mas_environments)/clean_maps/$(arg world)/$(arg world).yaml" />
+    <arg name="map_file" default="$(find mas_environments)/$(arg robot_name)/brsu-c069/map.yaml" />
 
     <!-- Navigation parameters -->
     <arg name="nav_name" default="teb"/>
     <arg name="controller_frequency" default="5.0"/>
     <arg name="costmap_params_dir" default="$(find freddy_bringup)/ros/config/move_base_config"/>
-    <arg name="scan_topic_name" default="/$(arg robot_name)/base_scan_front"/>
+    <!-- <arg name="scan_topic_name" default="/$(arg robot_name)/base_scan_front"/> -->
+    <arg name="scan_topic_name" default="/freddy/base_scan_front"/>
 
     <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
 
-    <node pkg="ira_laser_tools" name="laserscan_multi_merger" type="laserscan_multi_merger" output="screen">
+    <!-- <node pkg="ira_laser_tools" name="laserscan_multi_merger" type="laserscan_multi_merger" output="screen">
         <param name="destination_frame" value="base_link"/>
         <param name="scan_destination_topic" value="/base_scan"/>
         <param name="laserscan_topics" value ="/freddy/base_scan_back /freddy/base_scan_front" />
@@ -34,7 +35,7 @@
         <param name="scan_time" value="0.025"/>
         <param name="range_min" value="0.1"/>
         <param name="range_max" value="10.0"/>
-    </node>
+    </node> -->
 
     <!-- Launch the navigation stack -->
 
