@@ -5,19 +5,19 @@ TebLocalPlannerROS:
 
     # Robot Configuration Parameters
     # ==============================
-    acc_lim_x: 0.5                                  # (double, default: 0.5)
+    acc_lim_x: 0.2                                  # (double, default: 0.5)
     # Maximum translational acceleration of the robot in meters/sec^2
 
-    acc_lim_theta: 0.5                              # (double, default: 0.5)
+    acc_lim_theta: 0.2                              # (double, default: 0.5)
     # Maximum angular acceleration of the robot in radians/sec^2
 
-    max_vel_x: 0.7                                  # (double, default: 0.4)
+    max_vel_x: 0.3                                  # (double, default: 0.4)
     # Maximum translational velocity of the robot in meters/sec
 
     max_vel_x_backwards: 0.1                        # (double, default: 0.2)
     # Maximum absolute translational velocity of the robot while driving backwards in meters/sec. See optimization parameter weight_kinematics_forward_drive
 
-    max_vel_theta: 1.0                              # (double, default: 0.3)
+    max_vel_theta: 0.2                             # (double, default: 0.3)
     # Maximum angular velocity of the robot in radians/sec
 
     # # The following parameters are relevant only for carlike robots:
@@ -53,7 +53,7 @@ TebLocalPlannerROS:
         # # This parameter is only relevant for type "two_circles". It describes how much the center of the rear circle is shifted along the robot's negative x-axis. The robot's axis of rotation is assumed to be located at [0,0].
         # rear_radius: 0.2                          # (double, default: 0.2)
         # # This parameter is only relevant for type "two_circles". It contains the radius of rear circle.
-        vertices: [[-0.33, 0.33], [0.33, 0.33], [0.33, -0.33], [-0.33, -0.33]]
+        vertices: [[-0.35, 0.35], [0.35, 0.35], [0.35, -0.35], [-0.35, -0.35]]
         # This parameter is only relevant for type "polygon". It contains the list of polygon vertices (2d coordinates each). The polygon is always closed: do not repeat the first vertex at the end.
 
     is_footprint_dynamic: false                     # (bool, default: false)
@@ -61,10 +61,10 @@ TebLocalPlannerROS:
 
     # Goal Tolerance Parameters
     # =========================
-    xy_goal_tolerance: 0.2                          # (double, default: 0.2)
+    xy_goal_tolerance: 0.15                          # (double, default: 0.2)
     # Allowed final euclidean distance to the goal position in meters
 
-    yaw_goal_tolerance: 0.2                         # (double, default: 0.2)
+    yaw_goal_tolerance: 0.1                         # (double, default: 0.2)
     # Allowed final orientation error in radians
 
     free_goal_vel: false                            # (bool, default: false)

@@ -26,4 +26,7 @@
       <param name="angle_max" value="$(arg angle_max)"/>
       <remap from="scan" to="$(arg topic_name)" />
     </node>
+
+    <!-- when launching this launch fil independently, inorder to visualise in rviz, static_transform_publisher is used -->
+    <!-- <node pkg="tf" type="static_transform_publisher" name="laser_link" args="0 0 0 0 0 0 /map $(arg frame_id) 30" /> -->
 </launch>

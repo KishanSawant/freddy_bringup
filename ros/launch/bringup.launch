@@ -1,10 +1,10 @@
 <?xml version='1.0'?>
 <launch>
-    <arg name="front_laser_ip" default="192.168.1.101" />
+    <arg name="front_laser_ip" default="192.168.1.102" />
     <arg name="front_laser_frame_id" default="base_laser_front_link" />
     <arg name="front_laser_topic_name" default="/freddy/base_scan_front" />
 
-    <arg name="back_laser_ip" default="192.168.1.102" />
+    <arg name="back_laser_ip" default="192.168.1.101" />
     <arg name="back_laser_frame_id" default="base_laser_back_link" />
     <arg name="back_laser_topic_name" default="/freddy/base_scan_back" />
 
@@ -15,21 +15,36 @@
     </node>
 
     <!-- Start base driver -->
-    <include file="$(find smart_wheel_driver)/launch/narko.launch" />
+    <!-- <include file="$(find smart_wheel_driver)/launch/narko.launch" /> -->
+    <include file="$(find kelo_tulip)/launch/example_joypad.launch"/>
 
-    <!-- Start front laser driver -->
+    <!-- Start front laser driver 
     <include file="$(find freddy_bringup)/ros/launch/sensors/hokuyo.launch">
         <arg name="name" value="front_laser" />
         <arg name="ip_address" value="$(arg front_laser_ip)" />
         <arg name="frame_id" value="$(arg front_laser_frame_id)" />
         <arg name="topic_name" value="$(arg front_laser_topic_name)" />
-    </include>
+    </include> -->
 
-    <!-- Start back laser driver -->
+
+    <!-- Start back laser driver 
     <include file="$(find freddy_bringup)/ros/launch/sensors/hokuyo.launch">
         <arg name="name" value="back_laser" />
         <arg name="ip_address" value="$(arg back_laser_ip)" />
         <arg name="frame_id" value="$(arg back_laser_frame_id)" />
         <arg name="topic_name" value="$(arg back_laser_topic_name)" />
-    </include>
+    </include> 
+
+
+    <node pkg="ira_laser_tools" name="laserscan_multi_merger" type="laserscan_multi_merger" output="screen">
+        <param name="destination_frame" value="base_link"/>
+        <param name="scan_destination_topic" value="/base_scan"/>
+        <param name="laserscan_topics" value ="/freddy/base_scan_back /freddy/base_scan_front" />
+        <param name="angle_min" value="-3.142"/>
+        <param name="angle_max" value="3.142"/>
+        <param name="angle_increment" value="0.004363323"/>
+        <param name="scan_time" value="0.025"/>
+        <param name="range_min" value="0.01"/>
+        <param name="range_max" value="10.0"/>
+    </node> -->
 </launch>
